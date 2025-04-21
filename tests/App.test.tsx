@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
 import App from '../src/App' // 假设 App 组件在 src 目录下
 
