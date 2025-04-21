@@ -4,9 +4,9 @@
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat-square&logo=tailwind-css&logoColor=white)
-![Open%20Source](https://img.shields.io/badge/Open%20Source-ff6600?style=flat-square)
-![Frontend](https://img.shields.io/badge/Frontend-0085FF?style=flat-square)
-![Responsive](https://img.shields.io/badge/Responsive-42b883?style=flat-square)
+![Tests](https://img.shields.io/badge/tests-Jest-brightgreen)
+![Codecov](https://img.shields.io/codecov/c/github/hizpark/adminify-app)
+![CI](https://github.com/hizpark/adminify-app/actions/workflows/cicd.yml/badge.svg)
 
 > The modern foundation for building elegant and scalable admin dashboards.
 
