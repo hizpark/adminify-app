@@ -1,0 +1,95 @@
+{
+    "$schema": "https://json.schemastore.org/release-it.json",
+    "git": {
+        "commitMessage": "chore: release v${version}",
+        "tagName": "v${version}",
+        "tagAnnotation": "Release v${version}",
+        "requireCleanWorkingDir": true,
+        "requireUpstream": false
+    },
+    "github": {
+        "release": true,
+        "releaseName": "${name} v${version}",
+        "assets": [
+            "dist/*.zip",
+            "dist/*.tar.gz",
+            "!**/*.map",
+            "!**/*.tmp.*"
+        ],
+        "draft": false,
+        "preRelease": false,
+        "tokenRef": "GITHUB_TOKEN"
+    },
+    "npm": {
+        "publish": false
+    },
+    "plugins": {
+        "@release-it/conventional-changelog": {
+            "preset": "angular",
+            "infile": "CHANGELOG.md",
+            "header": "# ${name} 变更日志\n\n> 版本发布时间: ${date}",
+            "writerOpts": {
+                "groupBy": "type",
+                "commitGroupsSort": [
+                    "feat",
+                    "fix",
+                    "perf",
+                    "docs"
+                ],
+                "commitsSort": [
+                    "scope",
+                    "subject"
+                ]
+            }
+        },
+        "@release-it/bumper": {
+            "file": [
+                "package.json",
+                "src/constants/version.js",
+                "docs/version.json"
+            ],
+            "override": {
+                "src/constants/version.js": {
+                    "replace": [
+                        {
+                            "from": "__VERSION__",
+                            "to": "${version}"
+                        },
+                        {
+                            "from": "__BUILD_TIME__",
+                            "to": "\"${new Date().toISOString()}\"",
+                            "isRegex": false
+                        }
+                    ]
+                },
+                "docs/version.json": {
+                    "replace": [
+                        {
+                            "from": "\"timestamp\": \"\"",
+                            "to": "\"timestamp\": \"${new Date().toISOString()}\"",
+                            "isRegex": false
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "hooks": {
+        "before:init": [
+            "npm run bundle",
+            "npm run test:ci",
+            "npm run build"
+        ],
+        "after:bump": [
+            "node update-version-doc.js"
+        ],
+        "after:release": [
+            "echo '${name} v${version} 发布成功'"
+        ]
+    },
+    "scripts": {
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    },
+    "safeBump": false,
+    "increment": "conventional:angular"
+}
