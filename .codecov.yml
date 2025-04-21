@@ -1,0 +1,32 @@
+coverage:
+  status:
+    # 项目级别的覆盖率要求
+    project:
+      default:
+        threshold: 80 # 设定覆盖率门槛为 80%
+        base: auto     # 基准覆盖率自动设置
+
+upload:
+  # 上传覆盖率报告的路径，Jest 默认生成 lcov.info 文件
+  files:
+    - ./coverage/lcov-report/lcov-report.html
+    - ./coverage/lcov.info
+
+merge:
+  # 合并来自不同分支的报告
+  method: merge
+
+coverage:
+  status:
+    # 针对整个项目设置覆盖率门槛
+    project:
+      default:
+        threshold: 80 # 统一设置项目级别的覆盖率门槛
+
+  # 针对单元测试或其他测试类型设置覆盖率门槛
+  flag:
+    unittests:
+      threshold: 80 # 单元测试的覆盖率门槛
+
+# 为 jest 环境设置配置（可选）
+# 添加代码覆盖率报告上传时，设置报告格式和文件路径

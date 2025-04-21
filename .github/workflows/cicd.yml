@@ -5,7 +5,7 @@ on:
     branches:
       - main # 触发主分支代码推送
     tags:
-      - "v*" # 触发版本 tag 推送
+      - 'v*' # 触发版本 tag 推送
   pull_request:
     branches:
       - main # 触发 pull request 合并到 main 分支
@@ -21,13 +21,25 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Run lint checks
+        run: npm run lint
+
       - name: Run Jest tests
         run: npm run test:ci
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # 如果您已设置全局令牌，可以省略此行
+          files: ./coverage/lcov.info # 这指向 Jest 生成的覆盖率文件
+          flags: unittests
+          name: codecov-coverage-report
+          fail_ci_if_error: true # 如果上传错误，CI 将失败
 
   release:
     runs-on: ubuntu-latest
