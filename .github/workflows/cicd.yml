@@ -8,7 +8,7 @@ on:
       - 'v*' # 触发版本 tag 推送
   pull_request:
     branches:
-      - main # 触发 pull request 合并到 main 分支
+      - main # 触发 PR 合并到 main 分支
 
 jobs:
   test:
@@ -61,7 +61,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
@@ -72,11 +72,11 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Run release-it to create a new release
+      - name: Run semantic-release to create a new release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 必须的 GitHub Token
         run: |
-          npx release-it --ci --verbose
+          npx semantic-release
 
       - name: Upload release assets
         if: success()
