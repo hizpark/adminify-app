@@ -50,13 +50,13 @@ Once the development server is running, you can open the app in your browser at 
 
 ```text
 .
-├── docs                        # Documentation and versioning data
-│   └── version.json            # Current version information
 ├── .github                     # GitHub-related configuration
 │   └── workflows               # GitHub Actions workflows for CI/CD
 ├── .husky                      # Husky hooks for Git hooks (e.g., commit-msg, pre-commit)
 │   ├── commit-msg              # Commit message hook configuration
 │   └── pre-commit              # Pre-commit hook configuration
+├── docs                        # Documentation and versioning data
+│   └── version.json            # Current version information
 ├── public                      # Static assets (served by Vite)
 ├── scripts                     # Automation scripts
 │   └── update-version-doc.cjs  # Script for updating version info in documentation
